@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextBites 🍽️
 
-## Getting Started
+A small recipe site built with **Next.js (App Router)** and **TypeScript**.
+This is Part 1 of the NextBites project: repo setup and a data-driven home page.
 
-First, run the development server:
+## Features
+
+- Typed `Recipe` model and recipe data in a single source file
+- Reusable, typed `RecipeCard` component
+- Shared `NavBar` rendered once in the root layout
+- Home page that maps recipes into a responsive CSS grid
+
+## Tech stack
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [React](https://react.dev/)
+- TypeScript
+- ESLint
+
+## Getting started
 
 ```bash
+git clone https://github.com/devacharan-cu/nextbites.git
+cd nextbites
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command         | Description                  |
+| --------------- | ---------------------------- |
+| `npm run dev`   | Start the dev server         |
+| `npm run build` | Create a production build    |
+| `npm run start` | Run the production build     |
+| `npm run lint`  | Lint the code with ESLint    |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+app/
+├── components/
+│   ├── NavBar.tsx       # shared navigation bar
+│   └── RecipeCard.tsx   # typed card: { recipe }: { recipe: Recipe }
+├── data/
+│   └── recipes.ts       # Recipe type + recipes array
+├── globals.css          # global styles and responsive grid
+├── layout.tsx           # root layout (NavBar + {children})
+└── page.tsx             # home page: recipes.map() -> RecipeCard
+```
 
-To learn more about Next.js, take a look at the following resources:
+## How it works
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. `app/data/recipes.ts` exports the `Recipe` type and the `recipes` array.
+2. `RecipeCard` takes one typed `recipe` prop and renders its fields.
+3. `app/page.tsx` maps every recipe to a `<RecipeCard key={recipe.id} />`.
+4. The grid uses `repeat(auto-fill, minmax(230px, 1fr))`, so it reflows from one column on phones to several on desktops.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Roadmap
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Part 2:** search and dynamic recipe detail pages
+- **Part 3:** deployment
