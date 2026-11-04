@@ -9,6 +9,8 @@ This is Part 1 of the NextBites project: repo setup and a data-driven home page.
 - Reusable, typed `RecipeCard` component
 - Shared `NavBar` rendered once in the root layout
 - Home page that maps recipes into a responsive CSS grid
+- Live search (client component) with an empty-state message
+- Dynamic route `/recipe/[id]` with ingredients and steps for every recipe
 
 ## Tech stack
 
@@ -41,12 +43,14 @@ Open [http://localhost:3000](http://localhost:3000).
 app/
 ├── components/
 │   ├── NavBar.tsx       # shared navigation bar
-│   └── RecipeCard.tsx   # typed card: { recipe }: { recipe: Recipe }
+│   ├── RecipeCard.tsx   # typed card, links to /recipe/[id]
+│   └── RecipeGrid.tsx   # client component: search + grid
 ├── data/
-│   └── recipes.ts       # Recipe type + recipes array
+│   └── recipes.ts       # Recipe type, recipes array, getRecipe()
 ├── globals.css          # global styles and responsive grid
 ├── layout.tsx           # root layout (NavBar + {children})
-└── page.tsx             # home page: recipes.map() -> RecipeCard
+├── recipe/[id]/page.tsx # dynamic detail page
+└── page.tsx             # home page: renders RecipeGrid
 ```
 
 ## How it works
@@ -58,5 +62,5 @@ app/
 
 ## Roadmap
 
-- **Part 2:** search and dynamic recipe detail pages
+- **Part 2 (done):** search and dynamic recipe detail pages
 - **Part 3:** deployment
